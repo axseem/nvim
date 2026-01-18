@@ -35,7 +35,6 @@
           ripgrep
           fd
           lazygit
-          wl-clipboard
           universal-ctags
 
           marksman
