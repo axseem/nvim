@@ -96,3 +96,62 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
+
+-- Zig: build on save and show compiler diagnostics inline
+local zig_diag_ns = vim.api.nvim_create_namespace("zig-build")
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  desc = "Run zig build on save and report diagnostics",
+  group = vim.api.nvim_create_augroup("zig-build-on-save", { clear = true }),
+  pattern = "*.zig",
+  callback = function(ev)
+    local root = vim.fs.root(ev.buf, { "build.zig" })
+    if not root then return end
+
+    vim.system(
+      { "zig", "build" },
+      { cwd = root, text = true },
+      vim.schedule_wrap(function(result)
+        vim.diagnostic.reset(zig_diag_ns)
+
+        local output = (result.stderr or "") .. (result.stdout or "")
+        if output == "" then return end
+
+        local diags_by_file = {}
+        for file, line, col, severity, msg in output:gmatch("([^\n]-):(%d+):(%d+): (%w+): ([^\n]+)") do
+          local path = file
+          if not vim.startswith(path, "/") then
+            path = root .. "/" .. path
+          end
+          path = vim.fs.normalize(path)
+
+          if not diags_by_file[path] then
+            diags_by_file[path] = {}
+          end
+
+          local sev = vim.diagnostic.severity.ERROR
+          if severity == "warning" then
+            sev = vim.diagnostic.severity.WARN
+          elseif severity == "note" then
+            sev = vim.diagnostic.severity.INFO
+          end
+
+          table.insert(diags_by_file[path], {
+            lnum = tonumber(line) - 1,
+            col = tonumber(col) - 1,
+            message = msg,
+            severity = sev,
+            source = "zig build",
+          })
+        end
+
+        for path, diags in pairs(diags_by_file) do
+          local bufnr = vim.fn.bufnr(path)
+          if bufnr ~= -1 then
+            vim.diagnostic.set(zig_diag_ns, bufnr, diags)
+          end
+        end
+      end)
+    )
+  end,
+})

@@ -15,6 +15,7 @@
     inherit (nixCats) utils;
     luaPath = ./.;
     forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
+    lib = nixpkgs.lib;
     extra_pkg_config = {};
 
     dependencyOverlays = [
@@ -31,30 +32,33 @@
       ...
     } @ packageDef: {
       lspsAndRuntimeDeps = with pkgs; {
-        general = [
-          ripgrep
-          fd
-          lazygit
-          universal-ctags
+        general =
+          [
+            ripgrep
+            fd
+            lazygit
+            universal-ctags
 
-          marksman
-          lua-language-server
-          nixd
-          basedpyright
-          rust-analyzer
-          typescript-language-server
-          svelte-language-server
-          vscode-langservers-extracted
-          zls
+            marksman
+            lua-language-server
+            nixd
+            basedpyright
+            rust-analyzer
+            typescript-language-server
+            svelte-language-server
+            zls
 
-          alejandra
-          stylua
-          shfmt
-          ruff
-          rustfmt
-          prettierd
-          eslint_d
-        ];
+            alejandra
+            stylua
+            shfmt
+            ruff
+            rustfmt
+            prettierd
+          ]
+          ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+            vscode-langservers-extracted
+            eslint_d
+          ];
       };
 
       startupPlugins = with pkgs.vimPlugins; {
@@ -188,7 +192,7 @@
     in {
       packages = utils.mkAllWithDefault defaultPackage;
 
-      devShell = {
+      devShells = {
         default = pkgs.mkShell {
           name = defaultPackageName;
           packages = [defaultPackage];
