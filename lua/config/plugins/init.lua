@@ -40,15 +40,31 @@ require("nixCatsUtils.lazyCat").setup(nixCats.pawsible({ "allPlugins", "start", 
 	-- Choose theme by using the config option.
 
 	-- [ "tokyonight", "tokyonight-day", "tokyonight-storm", "tokyonight-moon", "tokyonight-night" ]
-	{ "folke/tokyonight.nvim" },
+	{
+		"folke/tokyonight.nvim",
+		opts = {
+			on_colors = function(colors)
+				colors.bg = "#000000"
+				colors.bg_dark = "#000000"
+				colors.bg_float = "#000000"
+				colors.bg_sidebar = "#000000"
+				colors.bg_statusline = "#000000"
+			end,
+		},
+	},
 	-- [ "catppuccin", "catppuccin-latte", "catppuccin-frappe", "catppuccin-macchiato", "catppuccin-mocha" ]
 	{
 		"catppuccin/nvim",
 		name = "catppuccin.nvim",
 		opts = {
-			transparent_background = true,
 			term_colors = true,
 			default_integrations = true,
+			color_overrides = {
+				mocha = { base = "#000000", mantle = "#000000", crust = "#000000" },
+				frappe = { base = "#000000", mantle = "#000000", crust = "#000000" },
+				macchiato = { base = "#000000", mantle = "#000000", crust = "#000000" },
+				latte = { base = "#000000", mantle = "#000000", crust = "#000000" },
+			},
 		},
 	},
 	-- [ "gruvbox-material" ]
@@ -105,4 +121,4 @@ require("nixCatsUtils.lazyCat").setup(nixCats.pawsible({ "allPlugins", "start", 
 	{ import = "config.plugins.conform" },
 }, lazyOptions)
 
-vim.cmd.colorscheme("rose-pine-moon")
+vim.cmd.colorscheme("catppuccin")

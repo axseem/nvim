@@ -171,7 +171,7 @@
           customPlugins = true;
           test = true;
           formatters = true;
-          colorscheme = "rose-pine-moon";
+          colorscheme = "catppuccin";
           nvim-gitsigns = true;
           have_nerd_font = true;
         };
