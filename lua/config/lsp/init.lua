@@ -6,7 +6,7 @@ require("config.lsp.config.rust_analyzer")
 require("config.lsp.config.ts_ls")
 require("config.lsp.config.svelte")
 require("config.lsp.config.eslint")
--- require("config.lsp.config.zls") -- disabled: ZLS 0.15.1 doesn't support Zig 0.16.0-dev
+require("config.lsp.config.zls")
 
 vim.lsp.enable("marksman")
 vim.lsp.enable("nixd")
@@ -16,7 +16,7 @@ vim.lsp.enable("rust-analyzer")
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("svelte")
 vim.lsp.enable("eslint")
--- vim.lsp.enable("zls")
+vim.lsp.enable("zls")
 
 vim.lsp.inlay_hint.enable(false)
 
