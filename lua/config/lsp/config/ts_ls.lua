@@ -71,7 +71,15 @@
 --- `filetypes` is extended here to include Vue SFC.
 
 vim.lsp.config('ts_ls', {
-  init_options = { hostInfo = 'neovim' },
+  init_options = {
+    hostInfo = 'neovim',
+    plugins = {
+      {
+        name = "typescript-svelte-plugin",
+        location = "typescript-svelte-plugin",
+      },
+    },
+  },
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
     'javascript',

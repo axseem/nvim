@@ -27,9 +27,14 @@ if nixCats("formatters") then
 				sh = { "shfmt" },
 				python = { "ruff" },
 				rust = { "rustfmt", lsp_format = "fallback" },
-				svelte = { "eslint_d" },
-				javascript = { "eslint_d" },
-				typescript = { "eslint_d" },
+				svelte = { "prettierd" },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				typescriptreact = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
+				json = { "prettierd" },
 			},
 			formatters = {
 				eslint_d = {
