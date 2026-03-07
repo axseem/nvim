@@ -105,11 +105,11 @@ return {
 
     local function find_command()
       if 1 == vim.fn.executable("rg") then
-        return { "rg", "--files", "--color", "never", "-g", "!.git" }
+        return { "rg", "--files", "--color", "never", "--hidden", "--no-ignore", "-g", "!.git" }
       elseif 1 == vim.fn.executable("fd") then
-        return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
+        return { "fd", "--type", "f", "--color", "never", "--hidden", "--no-ignore", "-E", ".git" }
       elseif 1 == vim.fn.executable("fdfind") then
-        return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
+        return { "fdfind", "--type", "f", "--color", "never", "--hidden", "--no-ignore", "-E", ".git" }
       elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
         return { "find", ".", "-type", "f" }
       elseif 1 == vim.fn.executable("where") then
@@ -136,6 +136,17 @@ return {
           end
           return 0
         end,
+
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--hidden",
+          "--no-ignore",
+        },
 
         mappings = {
           i = {

@@ -4,7 +4,7 @@ return {
   lazy = false,
   opts = {
     dashboard = { enabled = false },
-    explorer = { enabled = true },
+    explorer = { enabled = true, hidden = true, ignored = true },
     git = { enabled = true },
     indent = { enabled = true },
     input = { enabled = false },
