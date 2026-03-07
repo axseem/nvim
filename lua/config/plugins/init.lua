@@ -119,6 +119,9 @@ require("nixCatsUtils.lazyCat").setup(nixCats.pawsible({ "allPlugins", "start", 
 
 	-- NOTE: conform formatter
 	{ import = "config.plugins.conform" },
+
+	-- NOTE: Scheme/Lisp support
+	{ import = "config.plugins.scheme" },
 }, lazyOptions)
 
 vim.cmd.colorscheme("catppuccin")

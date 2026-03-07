@@ -6,7 +6,7 @@ return {
     opts = {
       -- NOTE: nixCats: use lazyAdd to only set these 2 options if nix wasnt involved.
       -- because nix already ensured they were installed.
-      ensure_installed = require('nixCatsUtils').lazyAdd { 'bash', 'c', 'css', 'diff', 'html', 'javascript', 'json', 'lua', 'luadoc', 'markdown', 'svelte', 'typescript', 'tsx', 'vim', 'vimdoc' },
+      ensure_installed = require('nixCatsUtils').lazyAdd { 'bash', 'c', 'css', 'diff', 'html', 'javascript', 'json', 'lua', 'luadoc', 'markdown', 'scheme', 'svelte', 'typescript', 'tsx', 'vim', 'vimdoc' },
       auto_install = require('nixCatsUtils').lazyAdd(true, false),
 
       highlight = {
