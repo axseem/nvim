@@ -35,6 +35,8 @@ if nixCats("formatters") then
 				css = { "prettierd" },
 				html = { "prettierd" },
 				json = { "prettierd" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
 			},
 			formatters = {
 				eslint_d = {
