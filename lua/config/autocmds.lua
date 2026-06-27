@@ -1,31 +1,11 @@
--- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text | Briefly highlight yanked text",
+	desc = "Highlight yanked text",
 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
 })
 
-local lsp_hishlight = vim.api.nvim_create_augroup("lsp-hishlight", { clear = false })
-
--- Highlight refrences of the word under the cursor
-vim.api.nvim_create_autocmd({ "CursorMoved", "cursorMovedI" }, {
-	desc = "Highlight refrences of the word under the cursor",
-	group = lsp_hishlight,
-	pattern = { "*.c", "*.h", "*.py", "*.rs", "*.lua", "*.nix", "*.js", "*.ts", "*.jsx", "*.tsx", "*.zig" },
-	callback = vim.lsp.buf.document_highlight,
-})
-
--- Highlight refrences of the word under the cursor
-vim.api.nvim_create_autocmd({ "CursorMoved", "cursorMovedI" }, {
-	desc = "Highlight refrences of the word under the cursor",
-	group = lsp_hishlight,
-	pattern = { "*.c", "*.h", "*.py", "*.rs", "*.lua", "*.nix", "*.js", "*.ts", "*.jsx", "*.tsx", "*.zig" },
-	callback = vim.lsp.buf.clear_references,
-})
-
--- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = vim.api.nvim_create_augroup("last_loc", { clear = true }),
 	callback = function(event)
@@ -43,25 +23,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
 	pattern = {
-		"PlenaryTestPopup",
 		"checkhealth",
-		"dbout",
 		"gitsigns-blame",
-		"grug-far",
 		"help",
 		"lspinfo",
-		"neotest-output",
-		"neotest-output-panel",
-		"neotest-summary",
-		"notify",
 		"qf",
-		"spectre_panel",
 		"startuptime",
-		"tsplayground",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -78,7 +48,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("man_unlisted", { clear = true }),
 	pattern = { "man" },
@@ -87,7 +56,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("wrap_spell", { clear = true }),
 	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },

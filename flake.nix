@@ -15,7 +15,6 @@
     inherit (nixCats) utils;
     luaPath = ./.;
     forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
-    lib = nixpkgs.lib;
     extra_pkg_config = {};
 
     dependencyOverlays = [
@@ -32,112 +31,53 @@
       ...
     } @ packageDef: {
       lspsAndRuntimeDeps = with pkgs; {
-        general =
-          [
-            ripgrep
-            fd
-            lazygit
-            universal-ctags
-
-            marksman
-            lua-language-server
-            nixd
-            basedpyright
-            rust-analyzer
-            typescript-language-server
-            svelte-language-server
-            zls
-
-            alejandra
-            stylua
-            shfmt
-            ruff
-            rustfmt
-            prettierd
-          ]
-          ++ lib.optionals (!pkgs.stdenv.isDarwin) [
-            vscode-langservers-extracted
-            eslint_d
-          ];
+        general = [
+          ripgrep
+        ];
       };
 
       startupPlugins = with pkgs.vimPlugins; {
-        gitPlugins = [];
         general = [
-          todo-comments-nvim
-          which-key-nvim
           gitsigns-nvim
-          trouble-nvim
-          render-markdown-nvim
-
+          which-key-nvim
           plenary-nvim
           telescope-nvim
-          telescope-zf-native-nvim
-          telescope-ui-select-nvim
 
           (nvim-treesitter.withPlugins (
             plugins:
               with plugins; [
                 bash
                 c
-                corn
                 cpp
                 css
-                csv
                 diff
-                dockerfile
+                go
+                gomod
+                gosum
                 html
                 javascript
-                jsdoc
                 json
-                latex
                 lua
-                luadoc
-                luap
                 markdown
                 markdown-inline
-                nginx
                 nix
-                printf
-                python
-                query
-                regex
                 rust
-                sql
                 svelte
-                toml
                 tsx
                 typescript
                 vim
                 vimdoc
-                xml
-                yaml
                 zig
               ]
           ))
 
           blink-cmp
-          friendly-snippets
 
           conform-nvim
-
-          lazydev-nvim
-
-          lualine-nvim
-
-          snacks-nvim
-          ts-comments-nvim
-
-          smear-cursor-nvim
-
-          mini-icons
-
-          mini-pairs
         ];
       };
 
       optionalPlugins = {
-        gitPlugins = [];
         general = [];
       };
 
@@ -161,19 +101,12 @@
           suffix-LD = true;
           wrapRc = true;
           aliases = ["nvim"];
-          hosts.python3.enable = true;
-          hosts.node.enable = true;
+          hosts.python3.enable = false;
+          hosts.node.enable = false;
         };
 
         categories = {
           general = true;
-          gitPlugins = true;
-          customPlugins = true;
-          test = true;
-          formatters = true;
-          colorscheme = "catppuccin";
-          nvim-gitsigns = true;
-          have_nerd_font = true;
         };
       };
     };
