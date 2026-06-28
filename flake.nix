@@ -42,6 +42,7 @@
           which-key-nvim
           plenary-nvim
           telescope-nvim
+          lazy-nvim
 
           (nvim-treesitter.withPlugins (
             plugins:
