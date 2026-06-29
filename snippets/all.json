@@ -1,11 +1,16 @@
 {
 	"Today": {
-		"prefix": ["today", "date"],
+		"prefix": "date",
 		"body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
 		"description": "Insert today's date"
 	},
+	"Datetime": {
+		"prefix": "datetime",
+		"body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+		"description": "Insert current datetime"
+	},
 	"TODO": {
-		"prefix": ["todo", "td"],
+		"prefix": "todo",
 		"body": "TODO: ${1:thing}",
 		"description": "TODO note"
 	}

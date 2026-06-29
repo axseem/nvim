@@ -14,4 +14,9 @@ Aliases are just multiple prefixes:
 }
 ```
 
-Use `${1:name}` for tab stops and `${0}` for the final cursor position.
+Use `${1:name}` for the first tab stop with placeholder text, `${2:name}` for the next one, and `${0}` for the final cursor position.
+
+References:
+
+- [VS Code snippets syntax](https://code.visualstudio.com/docs/editing/userdefinedsnippets#_snippet-syntax)
+- [Blink snippets docs](https://cmp.saghen.dev/configuration/snippets.html)
