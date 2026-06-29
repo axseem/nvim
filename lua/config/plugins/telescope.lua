@@ -22,7 +22,14 @@ return {
 		defaults = {
 			prompt_prefix = "> ",
 			selection_caret = "> ",
-			border = true,
+			border = false,
+			layout_strategy = "bottom_pane",
+			layout_config = {
+				height = function(_, _, max_lines)
+					return max_lines
+				end,
+				prompt_position = "bottom",
+			},
 			vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--hidden", "--no-ignore" },
 		},
 	},

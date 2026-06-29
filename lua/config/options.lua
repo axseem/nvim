@@ -7,6 +7,8 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
+vim.opt.grepformat = "%f:%l:%c:%m"
 
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
@@ -14,6 +16,7 @@ end)
 
 vim.opt.signcolumn = "yes"
 vim.opt.showmode = false
+vim.opt.confirm = true
 vim.opt.laststatus = 3
 vim.opt.statusline = " %f %m%r%=%y %l:%c %p%% "
 vim.opt.fillchars = { eob = " " }
@@ -23,9 +26,12 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.wrap = false
+vim.opt.undofile = true
 
 vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 20
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 vim.opt.number = true
 vim.opt.relativenumber = true
