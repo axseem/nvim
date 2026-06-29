@@ -5,12 +5,12 @@
 		"description": "Insert today's date"
 	},
 	"Datetime": {
-		"prefix": "datetime",
+		"prefix": "dt",
 		"body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
 		"description": "Insert current datetime"
 	},
 	"TODO": {
-		"prefix": "todo",
+		"prefix": "td",
 		"body": "TODO: ${1:thing}",
 		"description": "TODO note"
 	}
