@@ -44,6 +44,8 @@ vim.opt.breakindent = true
 vim.cmd("syntax enable")
 
 local terminal_mono = {
+	foreground = "ctermfg=NONE",
+	background = "ctermbg=NONE",
 	gray = "ctermfg=8",
 	accent = "ctermfg=3",
 
@@ -88,7 +90,12 @@ local terminal_mono = {
 		"@string", "@character", "@constant", "@constant.builtin", "@number", "@boolean", "@float",
 	},
 }
-vim.g.terminal_mono_palette = { gray = terminal_mono.gray, accent = terminal_mono.accent }
+vim.g.terminal_mono_palette = {
+	foreground = terminal_mono.foreground,
+	background = terminal_mono.background,
+	gray = terminal_mono.gray,
+	accent = terminal_mono.accent,
+}
 
 function terminal_mono.apply()
 	vim.cmd("highlight clear")
@@ -110,6 +117,10 @@ function terminal_mono.apply()
 	set(terminal_mono.signal, terminal_mono.accent)
 	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, "cterm=reverse")
 	set({ "TelescopeSelection" }, "ctermfg=NONE ctermbg=NONE cterm=NONE")
+	set({ "Pmenu", "BlinkCmpMenu" }, terminal_mono.foreground .. " " .. terminal_mono.background .. " cterm=NONE")
+	set({ "BlinkCmpMenuBorder", "BlinkCmpLabel", "BlinkCmpLabelDetail", "BlinkCmpLabelDescription", "BlinkCmpSource", "BlinkCmpKind" }, terminal_mono.gray .. " " .. terminal_mono.background .. " cterm=NONE")
+	set({ "PmenuSel", "BlinkCmpMenuSelection" }, terminal_mono.foreground .. " " .. terminal_mono.background .. " cterm=NONE")
+	set({ "BlinkCmpLabelMatch" }, terminal_mono.accent .. " " .. terminal_mono.background .. " cterm=NONE")
 	set({ "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineInfo", "DiagnosticUnderlineHint" }, "cterm=underline")
 	set({ "StatusLine", "StatusLineNC" }, terminal_mono.gray .. " ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE")
 
