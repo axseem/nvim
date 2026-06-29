@@ -23,7 +23,6 @@ return {
 			prompt_prefix = "> ",
 			selection_caret = "> ",
 			border = true,
-			borderchars = { "-", "|", "-", "|", "+", "+", "+", "+" },
 			vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--hidden", "--no-ignore" },
 		},
 	},

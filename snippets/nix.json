@@ -1,0 +1,12 @@
+{
+	"Let In": {
+		"prefix": ["let", "li"],
+		"body": [
+			"let",
+			"\t${1:name} = ${2:value};",
+			"in",
+			"${0}"
+		],
+		"description": "Nix let binding"
+	}
+}

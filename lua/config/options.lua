@@ -59,6 +59,9 @@ local terminal_mono = {
 		"FloatShadow", "FloatShadowThrough",
 		"TelescopeBorder", "TelescopePromptBorder", "TelescopeResultsBorder", "TelescopePreviewBorder",
 		"TelescopePromptPrefix", "TelescopeSelectionCaret", "TelescopeTitle",
+		"BlinkCmpMenu", "BlinkCmpMenuBorder", "BlinkCmpLabel", "BlinkCmpLabelDetail", "BlinkCmpLabelDescription",
+		"BlinkCmpSource", "BlinkCmpKind", "BlinkCmpDoc", "BlinkCmpDocBorder", "BlinkCmpDocSeparator",
+		"BlinkCmpSignatureHelp", "BlinkCmpSignatureHelpBorder",
 		"WhichKey", "WhichKeyDesc", "WhichKeyGroup", "WhichKeyIcon", "WhichKeySeparator", "WhichKeyValue",
 		"WhichKeyBorder", "WhichKeyNormal", "WhichKeyFloat",
 		"netrwClassify", "netrwComment", "netrwHelpCmd", "netrwHide", "netrwLink", "netrwList",
@@ -74,7 +77,7 @@ local terminal_mono = {
 		"GitSignsDelete", "GitSignsTopdelete", "GitSignsChangedelete",
 		"GitSignsDeleteNr", "GitSignsTopdeleteNr", "GitSignsChangedeleteNr",
 		"GitSignsDeleteLn", "GitSignsTopdeleteLn", "GitSignsChangedeleteLn",
-		"netrwDir", "TelescopeMatching",
+		"netrwDir", "TelescopeMatching", "BlinkCmpLabelMatch",
 		"NvimInternalError", "RedrawDebugClear", "RedrawDebugComposed", "RedrawDebugRecompose",
 		"@string", "@character", "@constant", "@constant.builtin", "@number", "@boolean", "@float",
 	},
@@ -99,7 +102,7 @@ function terminal_mono.apply()
 	set(terminal_mono.code, "ctermfg=NONE ctermbg=NONE cterm=NONE")
 	set(terminal_mono.noise, terminal_mono.gray)
 	set(terminal_mono.signal, terminal_mono.accent)
-	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu" }, "cterm=reverse")
+	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, "cterm=reverse")
 	set({ "TelescopeSelection" }, "ctermfg=NONE ctermbg=NONE cterm=NONE")
 	set({ "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineInfo", "DiagnosticUnderlineHint" }, "cterm=underline")
 	set({ "StatusLine", "StatusLineNC" }, terminal_mono.gray .. " ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE")

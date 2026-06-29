@@ -1,0 +1,16 @@
+{
+	"Function": {
+		"prefix": ["fn", "fun"],
+		"body": [
+			"function ${1:name}(${2:args})",
+			"\t${0}",
+			"end"
+		],
+		"description": "Lua function"
+	},
+	"Require": {
+		"prefix": ["req", "r"],
+		"body": "local ${1:name} = require(\"${2:module}\")",
+		"description": "Lua require"
+	}
+}

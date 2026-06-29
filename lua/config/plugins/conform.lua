@@ -32,19 +32,5 @@ return {
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 		},
-		formatters = {
-			eslint_d = {
-				condition = function(_, ctx)
-					return vim.fs.find({
-						".eslintrc.js",
-						".eslintrc.cjs",
-						".eslintrc.yaml",
-						".eslintrc.yml",
-						".eslintrc.json",
-						"eslint.config.js",
-					}, { path = ctx.filename, upward = true })[1]
-				end,
-			},
-		},
 	},
 }
