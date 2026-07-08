@@ -49,10 +49,14 @@ local terminal_mono = {
 	gray = "ctermfg=8",
 	accent = "ctermfg=3",
 
+	-- Keep the theme to four terminal colors at any time: background, foreground, gray, and accent.
+	-- Every syntax group must be set explicitly so Vim defaults do not leak extra colors.
 	code = {
 		"Identifier", "Function", "PreProc", "Type", "Special",
+		"String", "Character", "Constant", "Number", "Boolean", "Float",
 		"@variable", "@function", "@function.call", "@method", "@method.call", "@property", "@field",
 		"@type", "@module", "@namespace",
+		"@string", "@character", "@constant", "@constant.builtin", "@number", "@boolean", "@float",
 		"netrwSymLink",
 		"GitSignsAdd", "GitSignsChange", "GitSignsUntracked",
 		"GitSignsAddNr", "GitSignsChangeNr", "GitSignsUntrackedNr",
@@ -114,7 +118,7 @@ function terminal_mono.apply()
 	vim.cmd("highlight NormalNC ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE")
 	vim.cmd("highlight CursorLine cterm=NONE ctermbg=NONE gui=NONE guibg=NONE")
 
-	set(terminal_mono.code, "ctermfg=NONE ctermbg=NONE cterm=NONE")
+	set(terminal_mono.code, "ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE")
 	set(terminal_mono.keywords, terminal_mono.accent)
 	set(terminal_mono.noise, terminal_mono.gray)
 	set(terminal_mono.signal, terminal_mono.accent)
