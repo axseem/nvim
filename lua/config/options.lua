@@ -52,10 +52,10 @@ local terminal_mono = {
 	-- Keep the theme to four terminal colors at any time: background, foreground, gray, and accent.
 	-- Every syntax group must be set explicitly so Vim defaults do not leak extra colors.
 	code = {
-		"Identifier", "Function", "PreProc", "Type", "Special",
+		"Identifier", "Function",
 		"String", "Character", "Constant", "Number", "Boolean", "Float",
 		"@variable", "@function", "@function.call", "@method", "@method.call", "@property", "@field",
-		"@type", "@module", "@namespace",
+		"@module", "@namespace",
 		"@string", "@character", "@constant", "@constant.builtin", "@number", "@boolean", "@float",
 		"netrwSymLink",
 		"GitSignsAdd", "GitSignsChange", "GitSignsUntracked",
@@ -64,8 +64,9 @@ local terminal_mono = {
 	},
 
 	keywords = {
-		"Statement", "Keyword", "Conditional", "Repeat", "Label", "Exception", "Operator",
-		"@keyword", "@operator",
+		"Statement", "PreProc", "Type", "Special",
+		"Keyword", "Conditional", "Repeat", "Label", "Exception", "Operator",
+		"@keyword", "@operator", "@type", "@type.builtin",
 	},
 
 	noise = {
