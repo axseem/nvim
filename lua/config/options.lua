@@ -50,14 +50,18 @@ local terminal_mono = {
 	accent = "ctermfg=3",
 
 	code = {
-		"Identifier", "Function", "Statement", "PreProc", "Type", "Special", "Keyword",
-		"Conditional", "Repeat", "Label", "Exception", "Operator",
+		"Identifier", "Function", "PreProc", "Type", "Special",
 		"@variable", "@function", "@function.call", "@method", "@method.call", "@property", "@field",
-		"@keyword", "@type", "@module", "@namespace", "@operator",
+		"@type", "@module", "@namespace",
 		"netrwSymLink",
 		"GitSignsAdd", "GitSignsChange", "GitSignsUntracked",
 		"GitSignsAddNr", "GitSignsChangeNr", "GitSignsUntrackedNr",
 		"GitSignsAddLn", "GitSignsChangeLn", "GitSignsUntrackedLn",
+	},
+
+	keywords = {
+		"Statement", "Keyword", "Conditional", "Repeat", "Label", "Exception", "Operator",
+		"@keyword", "@operator",
 	},
 
 	noise = {
@@ -77,7 +81,6 @@ local terminal_mono = {
 	},
 
 	signal = {
-		"String", "Character", "Constant", "Number", "Boolean", "Float",
 		"Error", "ErrorMsg", "WarningMsg",
 		"DiagnosticError", "DiagnosticWarn", "DiagnosticInfo", "DiagnosticHint", "DiagnosticOk",
 		"DiagnosticSignError", "DiagnosticSignWarn", "DiagnosticSignInfo", "DiagnosticSignHint",
@@ -87,7 +90,6 @@ local terminal_mono = {
 		"GitSignsDeleteLn", "GitSignsTopdeleteLn", "GitSignsChangedeleteLn",
 		"netrwDir", "TelescopeMatching", "BlinkCmpLabelMatch",
 		"NvimInternalError", "RedrawDebugClear", "RedrawDebugComposed", "RedrawDebugRecompose",
-		"@string", "@character", "@constant", "@constant.builtin", "@number", "@boolean", "@float",
 	},
 }
 vim.g.terminal_mono_palette = {
@@ -113,6 +115,7 @@ function terminal_mono.apply()
 	vim.cmd("highlight CursorLine cterm=NONE ctermbg=NONE gui=NONE guibg=NONE")
 
 	set(terminal_mono.code, "ctermfg=NONE ctermbg=NONE cterm=NONE")
+	set(terminal_mono.keywords, terminal_mono.accent)
 	set(terminal_mono.noise, terminal_mono.gray)
 	set(terminal_mono.signal, terminal_mono.accent)
 	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, "cterm=reverse")
