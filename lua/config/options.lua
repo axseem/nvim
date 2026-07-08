@@ -48,6 +48,7 @@ local terminal_mono = {
 	background = "ctermbg=NONE",
 	gray = "ctermfg=8 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE",
 	accent = "ctermfg=3 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE",
+	selection = "ctermfg=NONE ctermbg=8 cterm=NONE guifg=NONE guibg=NONE gui=NONE",
 
 	-- Keep the theme to four terminal colors at any time: background, foreground, gray, and accent.
 	-- Every syntax group must be set explicitly so Vim defaults do not leak extra colors.
@@ -125,17 +126,17 @@ function terminal_mono.apply()
 	set(terminal_mono.keywords, terminal_mono.accent)
 	set(terminal_mono.noise, terminal_mono.gray)
 	set(terminal_mono.signal, terminal_mono.accent)
-	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, "ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse")
+	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, terminal_mono.selection)
 	set({ "TelescopeSelection" }, "ctermfg=NONE ctermbg=NONE cterm=NONE")
 	set({ "Pmenu", "BlinkCmpMenu" }, terminal_mono.foreground .. " " .. terminal_mono.background .. " cterm=NONE")
 	set({ "BlinkCmpMenuBorder", "BlinkCmpLabel", "BlinkCmpLabelDetail", "BlinkCmpLabelDescription", "BlinkCmpSource", "BlinkCmpKind" }, terminal_mono.gray .. " " .. terminal_mono.background .. " cterm=NONE")
-	set({ "PmenuSel", "BlinkCmpMenuSelection" }, terminal_mono.foreground .. " " .. terminal_mono.background .. " cterm=NONE")
+	set({ "PmenuSel", "BlinkCmpMenuSelection" }, terminal_mono.selection)
 	set({ "BlinkCmpLabelMatch" }, terminal_mono.accent .. " " .. terminal_mono.background .. " cterm=NONE")
 	set({ "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineInfo", "DiagnosticUnderlineHint" }, "cterm=underline")
 	set({ "StatusLine", "StatusLineNC" }, terminal_mono.gray .. " ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE")
 
 	vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true })
-	vim.cmd("highlight PmenuThumb ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse")
+	vim.cmd("highlight PmenuThumb " .. terminal_mono.selection)
 	vim.cmd("highlight DiagnosticVirtualTextError " .. terminal_mono.accent)
 end
 
