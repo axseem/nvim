@@ -46,8 +46,8 @@ vim.cmd("syntax enable")
 local terminal_mono = {
 	foreground = "ctermfg=NONE",
 	background = "ctermbg=NONE",
-	gray = "ctermfg=8",
-	accent = "ctermfg=3",
+	gray = "ctermfg=8 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE",
+	accent = "ctermfg=3 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE",
 
 	-- Keep the theme to four terminal colors at any time: background, foreground, gray, and accent.
 	-- Every syntax group must be set explicitly so Vim defaults do not leak extra colors.
