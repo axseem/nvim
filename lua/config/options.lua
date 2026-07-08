@@ -72,6 +72,7 @@ local terminal_mono = {
 	noise = {
 		"NormalFloat", "FloatBorder", "WinSeparator", "SignColumn", "FoldColumn", "LineNr",
 		"NonText", "EndOfBuffer", "Whitespace", "Conceal", "Comment", "Delimiter", "Ignore",
+		"SpecialKey", "Folded", "ColorColumn", "CursorColumn", "WinBar", "WinBarNC",
 		"ModeMsg", "Pmenu", "Directory", "MoreMsg", "Question", "QuickFixLine",
 		"FloatShadow", "FloatShadowThrough",
 		"TelescopeBorder", "TelescopePromptBorder", "TelescopeResultsBorder", "TelescopePreviewBorder",
@@ -87,6 +88,7 @@ local terminal_mono = {
 
 	signal = {
 		"Error", "ErrorMsg", "WarningMsg",
+		"Title", "Todo",
 		"DiagnosticError", "DiagnosticWarn", "DiagnosticInfo", "DiagnosticHint", "DiagnosticOk",
 		"DiagnosticSignError", "DiagnosticSignWarn", "DiagnosticSignInfo", "DiagnosticSignHint",
 		"Added", "Changed", "Removed", "DiffAdd", "DiffChange", "DiffText", "DiffDelete",
@@ -123,7 +125,7 @@ function terminal_mono.apply()
 	set(terminal_mono.keywords, terminal_mono.accent)
 	set(terminal_mono.noise, terminal_mono.gray)
 	set(terminal_mono.signal, terminal_mono.accent)
-	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, "cterm=reverse")
+	set({ "Visual", "VisualNOS", "Search", "IncSearch", "CurSearch", "Substitute", "PmenuSel", "WildMenu", "BlinkCmpMenuSelection", "BlinkCmpDocCursorLine" }, "ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse")
 	set({ "TelescopeSelection" }, "ctermfg=NONE ctermbg=NONE cterm=NONE")
 	set({ "Pmenu", "BlinkCmpMenu" }, terminal_mono.foreground .. " " .. terminal_mono.background .. " cterm=NONE")
 	set({ "BlinkCmpMenuBorder", "BlinkCmpLabel", "BlinkCmpLabelDetail", "BlinkCmpLabelDescription", "BlinkCmpSource", "BlinkCmpKind" }, terminal_mono.gray .. " " .. terminal_mono.background .. " cterm=NONE")
@@ -133,9 +135,41 @@ function terminal_mono.apply()
 	set({ "StatusLine", "StatusLineNC" }, terminal_mono.gray .. " ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE")
 
 	vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true })
-	vim.cmd("highlight PmenuThumb cterm=reverse")
+	vim.cmd("highlight PmenuThumb ctermfg=NONE ctermbg=NONE cterm=reverse guifg=NONE guibg=NONE gui=reverse")
 	vim.cmd("highlight DiagnosticVirtualTextError " .. terminal_mono.accent)
 end
 
 _G.apply_terminal_mono = terminal_mono.apply
 terminal_mono.apply()
+
+function terminal_mono.audit()
+	local allowed_cterm = { [3] = true, [8] = true }
+	local leaks = {}
+
+	for group, spec in pairs(vim.api.nvim_get_hl(0, {})) do
+		for _, field in ipairs({ "fg", "bg" }) do
+			if spec[field] ~= nil then
+				table.insert(leaks, ("%s.%s=%s"):format(group, field, spec[field]))
+			end
+		end
+
+		for _, field in ipairs({ "ctermfg", "ctermbg" }) do
+			local value = spec[field]
+			if value ~= nil and not allowed_cterm[value] then
+				table.insert(leaks, ("%s.%s=%s"):format(group, field, value))
+			end
+		end
+	end
+
+	table.sort(leaks)
+	if #leaks > 0 then
+		error("terminal-mono palette leaks:\n" .. table.concat(leaks, "\n"))
+	end
+
+	return true
+end
+
+vim.api.nvim_create_user_command("TerminalMonoAudit", function()
+	terminal_mono.audit()
+	print("terminal-mono palette audit passed")
+end, {})
