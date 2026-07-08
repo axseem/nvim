@@ -2,7 +2,8 @@
 	"name": "axseem-snippets",
 	"contributes": {
 		"snippets": [
-			{ "language": "all", "path": "./all.json" }
+			{ "language": "all", "path": "./all.json" },
+			{ "language": "c", "path": "./c.json" }
 		]
 	}
 }

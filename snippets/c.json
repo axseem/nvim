@@ -1,0 +1,11 @@
+{
+	"typedef struct": {
+		"prefix": ["st", "struct"],
+		"body": [
+			"typedef struct {",
+			"\t$0",
+			"} ${1:Name};"
+		],
+		"description": "define struct as type"
+	}
+}
